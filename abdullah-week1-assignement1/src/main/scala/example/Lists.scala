@@ -26,7 +26,7 @@ object Lists extends App {
     if (xs.isEmpty) 0
     else xs.head + sum(xs.tail)
 
-
+  println("SUM")
   println(sum(List(1, 2, 3, 4, 5)))
 
   /**
@@ -43,11 +43,17 @@ object Lists extends App {
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
   def max(xs: List[Int]): Int = {
-    if (xs.isEmpty) 0
-    else if (xs.head > max(xs.tail)) xs.head
-    else max(xs.tail)
+    
+    def maxCalculator(xss: List[Int], currentMax: Int):Int = {
+      if (xss.isEmpty) currentMax
+      else if (xss.head > currentMax) then maxCalculator(xss.tail, xss.head) else maxCalculator(xss.tail, currentMax)
+    }
+    
+    if (xs.isEmpty) throw new NoSuchElementException
+    else maxCalculator(xs.tail, xs.head)
+    
   }
-
-  println(max(List(1, 2, 10, 3, 4, 5)))
+  println("MAX")
+  println(max(List(1, 2, 10, 3, 4, 5, 11, 15, 10, 17, 12)))
   
 }
