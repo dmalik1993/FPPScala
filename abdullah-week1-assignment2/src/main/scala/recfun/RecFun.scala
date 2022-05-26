@@ -9,7 +9,7 @@ object RecFun extends RecFunInterface:
         print(s"${pascal(col, row)} ")
       println()
       println("Balancer")
-      println(balance("as)jd(b)f".toList))
+      println(balance("(sad))is#$)()".toList))
       println("Count Change")
       println(countChange(10, List(1,2)))
 
@@ -26,14 +26,14 @@ object RecFun extends RecFunInterface:
    * Exercise 2
    */
   def balance(chars: List[Char]): Boolean = {
-    def balancer(currentChar: Char, count: Int, remainingChars: List[Char]): Boolean = {
+    def balancer(count: Int, remainingChars: List[Char]): Boolean = {
       if (remainingChars.isEmpty) if (count == 0) true else false
-      else if (currentChar == '(') balancer(remainingChars.head, count+1, remainingChars.tail)
-      else if (currentChar == ')' && count > 0) balancer(remainingChars.head, count-1, remainingChars.tail)
-      else  balancer(remainingChars.head, count, remainingChars.tail)
+      else if (remainingChars.head == '(') balancer(count+1, remainingChars.tail)
+      else if (remainingChars.head == ')' && count > 0) balancer(count-1, remainingChars.tail)
+      else  balancer(count, remainingChars.tail)
     }
     if (chars.isEmpty) true
-    else balancer(chars.head, 0, chars.tail)
+    else balancer(0, chars)
     
   }
 
