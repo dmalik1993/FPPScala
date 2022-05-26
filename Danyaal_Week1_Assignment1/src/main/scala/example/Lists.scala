@@ -1,0 +1,59 @@
+package example
+
+object Lists:
+
+  /**
+   * This method computes the sum of all elements in the list xs. There are
+   * multiple techniques that can be used for implementing this method, and
+   * you will learn during the class.
+   *
+   * For this example assignment you can use the following methods in class
+   * `List`:
+   *
+   *  - `xs.isEmpty: Boolean` returns `true` if the list `xs` is empty
+   *  - `xs.head: Int` returns the head element of the list `xs`. If the list
+   *    is empty an exception is thrown
+   *  - `xs.tail: List[Int]` returns the tail of the list `xs`, i.e. the the
+   *    list `xs` without its `head` element
+   *
+   *  ''Hint:'' instead of writing a `for` or `while` loop, think of a recursive
+   *  solution.
+   *
+   * @param xs A list of natural numbers
+   * @return The sum of all elements in `xs`
+   */
+  def sum(xs: List[Int]): Int = {
+    def calculateSum(xs: List[Int], sum: Int): Int = {
+      xs.isEmpty match {
+        case true => sum
+        case false => calculateSum(xs.tail, sum+xs.head)
+      }
+    }
+    calculateSum(xs, 0)
+  }
+
+  /**
+   * This method returns the largest element in a list of integers. If the
+   * list `xs` is empty it throws a `java.util.NoSuchElementException`.
+   *
+   * You can use the same methods of the class `List` as mentioned above.
+   *
+   * ''Hint:'' Again, think of a recursive solution instead of using looping
+   * constructs. You might need to define an auxiliary method.
+   *
+   * @param xs A list of natural numbers
+   * @return The largest element in `xs`
+   * @throws java.util.NoSuchElementException if `xs` is an empty list
+   */
+  def max(xs: List[Int]): Int = {
+    def calculateMax(xs: List[Int], currentMax: Int) : Int = {
+      xs.isEmpty match {
+        case true => currentMax
+        case false => calculateMax(xs.tail, if xs.head > currentMax then xs.head else currentMax)
+      }
+    }
+    xs.isEmpty match {
+      case true => throw new NoSuchElementException
+      case false => calculateMax(xs: List[Int], Integer.MIN_VALUE)
+    }
+  }
