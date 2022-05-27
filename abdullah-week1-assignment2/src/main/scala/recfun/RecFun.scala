@@ -9,7 +9,7 @@ object RecFun extends RecFunInterface:
         print(s"${pascal(col, row)} ")
       println()
       println("Balancer")
-      println(balance("(sad))is#$)()".toList))
+      println(balance(")(((sad))is#$)()".toList))
       println("Count Change")
       println(countChange(10, List(1,2)))
 
@@ -30,6 +30,7 @@ object RecFun extends RecFunInterface:
       if (remainingChars.isEmpty) if (count == 0) true else false
       else if (remainingChars.head == '(') balancer(count+1, remainingChars.tail)
       else if (remainingChars.head == ')' && count > 0) balancer(count-1, remainingChars.tail)
+      else if (remainingChars.head == ')' && count <= 0) false
       else  balancer(count, remainingChars.tail)
     }
     if (chars.isEmpty) true
