@@ -55,8 +55,8 @@ trait FunSets extends FunSetsInterface :
    */
   def forall(s: FunSet, p: Int => Boolean): Boolean =
     def iter(a: Int): Boolean =
-      if contains(s, a) && p(a) then true
-      else if contains(s, a) && !p(a) then false
+      if a > bound then true
+      else if a >= -bound && contains(s, a) && !p(a) then false
       else iter(a + 1)
 
     iter(-bound)
@@ -65,7 +65,7 @@ trait FunSets extends FunSetsInterface :
    * Returns whether there exists a bounded integer within `s`
    * that satisfies `p`.
    */
-  def exists(s: FunSet, p: Int => Boolean): Boolean = forall(s, x => p(x))
+  def exists(s: FunSet, p: Int => Boolean): Boolean = !forall(s, x => !p(x))
 
   /**
    * Returns a set transformed by applying `f` to each element of `s`.
