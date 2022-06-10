@@ -231,5 +231,19 @@ object GoogleVsApple {
 
 object Main extends App {
   // Print the trending tweets
+  val tweetSet = Empty()
+  val tweetSet1 = tweetSet.incl(Tweet("User1", "this is my tweet", 2))
+  val tweetSet2 = tweetSet1.incl(Tweet("User2", "whats up peeps", 10))
+  val tweetSet3 = tweetSet2.incl(Tweet("User3", "Going functional", 1000))
+  val tweetSet4 = tweetSet3.filter(tw => tw.retweets == 10)
+  val popularTweet = tweetSet3.mostRetweeted
+
+  println("All Tweets:")
+  tweetSet3.foreach(println)
+  println("Filtered Tweets:")
+  tweetSet4.foreach(println)
+  println("Most Popular Tweet:")
+  println(popularTweet.toString)
+  
   GoogleVsApple.trending foreach println
 }
